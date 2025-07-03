@@ -291,7 +291,7 @@ function updateRecentContent() {
 function renderContentTable() {
     if (filteredData.length === 0) {
         const message = contentData.length === 0 ? 'No content available' : 'No content matches your filters';
-        contentTable.innerHTML = `<tr><td colspan="7" class="preview-placeholder" style="text-align: center; padding: 40px;">${message}</td></tr>`;
+        contentTable.innerHTML = `<tr><td colspan="5" class="preview-placeholder" style="text-align: center; padding: 40px;">${message}</td></tr>`;
         return;
     }
 
@@ -306,8 +306,6 @@ function renderContentTable() {
             </td>
             <td><strong>${item.title}</strong></td>
             <td><span class="content-status status-${item.status}">${item.status}</span></td>
-            <td>${item.author || 'Unknown'}</td>
-            <td>${formatCategories(item.categories)}</td>
             <td>${formatDate(item.publishDate)}</td>
             <td>
                 <div class="action-buttons">

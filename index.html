@@ -52,6 +52,10 @@
                         <span class="tab-icon">➕</span>
                         <span class="tab-text">Create Content</span>
                     </button>
+                    <button class="tab-btn" data-tab="tips">
+                        <span class="tab-icon">💡</span>
+                        <span class="tab-text">Content Tips</span>
+                    </button>
                 </div>
                 
                 <div class="nav-section">
@@ -159,8 +163,6 @@
                                     <th>Image</th>
                                     <th>Title</th>
                                     <th>Status</th>
-                                    <th>Author</th>
-                                    <th>Categories</th>
                                     <th>Publish Date</th>
                                     <th>Actions</th>
                                 </tr>
@@ -280,6 +282,207 @@
                             </button>
                         </div>
                     </form>
+                </div>
+
+                <!-- Tips Tab -->
+                <div id="tips-tab" class="tab-content">
+                    <div class="page-header">
+                        <h1 class="page-title">Content Creation Tips</h1>
+                        <p class="page-description">Learn how to create successful blog content with our comprehensive guide</p>
+                    </div>
+
+                    <div class="tips-sections">
+                        <div class="tips-section">
+                            <h3>📝 Essential Content Fields</h3>
+                            <p class="section-description">Understanding each field and how to use them effectively</p>
+                            
+                            <div class="tip-item">
+                                <h4>🎯 Title</h4>
+                                <p><strong>Why it matters:</strong> Your title is the first thing readers see and is crucial for SEO. A compelling title can increase click-through rates by up to 500%.</p>
+                                <p><strong>Best practices:</strong></p>
+                                <ul>
+                                    <li>Keep it between 50-60 characters for optimal SEO</li>
+                                    <li>Include your primary keyword naturally</li>
+                                    <li>Make it compelling and benefit-driven</li>
+                                    <li>Use numbers, questions, or power words when appropriate</li>
+                                </ul>
+                                <p><strong>Examples:</strong> "10 Proven Strategies to Boost Your Blog Traffic" or "How to Create Engaging Content That Converts"</p>
+                            </div>
+
+                            <div class="tip-item">
+                                <h4>🔗 Slug</h4>
+                                <p><strong>Why it matters:</strong> The slug is part of your URL and affects both SEO and user experience. It's automatically generated from your title but can be customized.</p>
+                                <p><strong>Best practices:</strong></p>
+                                <ul>
+                                    <li>Keep it short and descriptive</li>
+                                    <li>Use hyphens to separate words</li>
+                                    <li>Include your main keyword</li>
+                                    <li>Avoid stop words (the, and, or, but, etc.)</li>
+                                </ul>
+                                <p><strong>Example:</strong> "boost-blog-traffic-strategies" instead of "10-proven-strategies-to-boost-your-blog-traffic"</p>
+                            </div>
+
+                            <div class="tip-item">
+                                <h4>📄 Content (Markdown)</h4>
+                                <p><strong>Why it matters:</strong> This is your main content where you provide value to readers. Quality content keeps readers engaged and improves search rankings.</p>
+                                <p><strong>Best practices:</strong></p>
+                                <ul>
+                                    <li>Start with a compelling introduction that hooks readers</li>
+                                    <li>Use headings (H2, H3) to structure your content</li>
+                                    <li>Write in short paragraphs (2-3 sentences max)</li>
+                                    <li>Include bullet points and numbered lists for readability</li>
+                                    <li>Add relevant images and examples</li>
+                                    <li>End with a clear call-to-action</li>
+                                </ul>
+                                <p><strong>Markdown tip:</strong> Use the toolbar above the editor for quick formatting!</p>
+                            </div>
+
+                            <div class="tip-item">
+                                <h4>🖼️ Featured Image URL</h4>
+                                <p><strong>Why it matters:</strong> Visual content increases engagement by 94%. Your featured image appears in social shares and can significantly impact click-through rates.</p>
+                                <p><strong>Best practices:</strong></p>
+                                <ul>
+                                    <li>Use high-quality, relevant images (minimum 1200x630px)</li>
+                                    <li>Ensure the image relates to your content</li>
+                                    <li>Consider adding text overlay for social media</li>
+                                    <li>Use free resources like Unsplash, Pexels, or Pixabay</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tips-section">
+                            <h3>🔍 SEO Optimization</h3>
+                            <p class="section-description">Optimize your content for search engines and better discoverability</p>
+                            
+                            <div class="tip-item">
+                                <h4>📋 Meta Description</h4>
+                                <p><strong>Why it matters:</strong> This appears in search results below your title. A compelling meta description can improve your click-through rate from search results.</p>
+                                <p><strong>Best practices:</strong></p>
+                                <ul>
+                                    <li>Keep it between 150-160 characters</li>
+                                    <li>Include your primary keyword</li>
+                                    <li>Write a compelling summary that encourages clicks</li>
+                                    <li>Make it unique for each post</li>
+                                </ul>
+                            </div>
+
+                            <div class="tip-item">
+                                <h4>🏷️ SEO Title</h4>
+                                <p><strong>Why it matters:</strong> This is the title that appears in search results and browser tabs. It can be different from your main title to optimize for search.</p>
+                                <p><strong>Best practices:</strong></p>
+                                <ul>
+                                    <li>Include your primary keyword at the beginning</li>
+                                    <li>Keep it under 60 characters</li>
+                                    <li>Make it descriptive and compelling</li>
+                                    <li>Include your brand name if space allows</li>
+                                </ul>
+                            </div>
+
+                            <div class="tip-item">
+                                <h4>🔑 Keywords</h4>
+                                <p><strong>Why it matters:</strong> Keywords help search engines understand your content topic and match it with user searches.</p>
+                                <p><strong>Best practices:</strong></p>
+                                <ul>
+                                    <li>Research keywords using tools like Google Keyword Planner</li>
+                                    <li>Focus on long-tail keywords (3-4 words)</li>
+                                    <li>Include 3-5 relevant keywords per post</li>
+                                    <li>Use keywords naturally in your content</li>
+                                </ul>
+                                <p><strong>Example:</strong> "content marketing, blog writing, SEO tips, digital marketing strategy"</p>
+                            </div>
+                        </div>
+
+                        <div class="tips-section">
+                            <h3>🏷️ Organization & Metadata</h3>
+                            <p class="section-description">Properly categorize and tag your content for better organization</p>
+                            
+                            <div class="tip-item">
+                                <h4>📂 Categories</h4>
+                                <p><strong>Why it matters:</strong> Categories help organize your content into broad topics, making it easier for readers to find related content.</p>
+                                <p><strong>Best practices:</strong></p>
+                                <ul>
+                                    <li>Use 1-2 categories per post maximum</li>
+                                    <li>Create broad, evergreen categories</li>
+                                    <li>Keep category names simple and descriptive</li>
+                                    <li>Maintain consistency across your content</li>
+                                </ul>
+                                <p><strong>Examples:</strong> "Web Development, Digital Marketing, Business Tips"</p>
+                            </div>
+
+                            <div class="tip-item">
+                                <h4>🏷️ Tags</h4>
+                                <p><strong>Why it matters:</strong> Tags are more specific than categories and help readers discover related content on similar subtopics.</p>
+                                <p><strong>Best practices:</strong></p>
+                                <ul>
+                                    <li>Use 5-10 relevant tags per post</li>
+                                    <li>Be specific and descriptive</li>
+                                    <li>Use existing tags when possible to create connections</li>
+                                    <li>Think about what readers might search for</li>
+                                </ul>
+                                <p><strong>Examples:</strong> "react, javascript, tutorial, beginners, frontend"</p>
+                            </div>
+
+                            <div class="tip-item">
+                                <h4>✍️ Author</h4>
+                                <p><strong>Why it matters:</strong> Author attribution builds trust and authority. It helps readers connect with the person behind the content.</p>
+                                <p><strong>Best practices:</strong></p>
+                                <ul>
+                                    <li>Use a consistent author name across all posts</li>
+                                    <li>Consider using your real name for personal branding</li>
+                                    <li>If multiple authors, maintain consistency in style</li>
+                                </ul>
+                            </div>
+
+                            <div class="tip-item">
+                                <h4>📊 Status</h4>
+                                <p><strong>Why it matters:</strong> Content status helps you manage your publishing workflow and content lifecycle.</p>
+                                <p><strong>Options:</strong></p>
+                                <ul>
+                                    <li><strong>Draft:</strong> Content is being worked on and not visible to readers</li>
+                                    <li><strong>Published:</strong> Content is live and visible to your audience</li>
+                                </ul>
+                                <p><strong>Tip:</strong> Use draft status to save work in progress and review before publishing.</p>
+                            </div>
+                        </div>
+
+                        <div class="tips-section">
+                            <h3>🚀 Content Success Strategies</h3>
+                            <p class="section-description">Advanced tips to make your content stand out and perform better</p>
+                            
+                            <div class="tip-item">
+                                <h4>📈 Engagement Optimization</h4>
+                                <ul>
+                                    <li>Write compelling introductions that hook readers immediately</li>
+                                    <li>Use storytelling techniques to make content more relatable</li>
+                                    <li>Include actionable tips and practical advice</li>
+                                    <li>Add relevant examples and case studies</li>
+                                    <li>End with questions to encourage comments</li>
+                                </ul>
+                            </div>
+
+                            <div class="tip-item">
+                                <h4>📱 Readability Best Practices</h4>
+                                <ul>
+                                    <li>Use short sentences and paragraphs</li>
+                                    <li>Include plenty of white space</li>
+                                    <li>Use bullet points and numbered lists</li>
+                                    <li>Add subheadings every 200-300 words</li>
+                                    <li>Write in a conversational tone</li>
+                                </ul>
+                            </div>
+
+                            <div class="tip-item">
+                                <h4>🎯 Content Planning</h4>
+                                <ul>
+                                    <li>Research your audience's pain points and interests</li>
+                                    <li>Create content that solves specific problems</li>
+                                    <li>Plan content series to keep readers coming back</li>
+                                    <li>Update and refresh older content regularly</li>
+                                    <li>Analyze performance and double down on what works</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Settings Tab -->

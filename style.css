@@ -757,6 +757,74 @@ body {
     outline: none;
 }
 
+/* Tips Tab */
+.tips-sections {
+    display: grid;
+    gap: 32px;
+}
+
+.tips-section {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    padding: 32px;
+    box-shadow: var(--shadow-sm);
+}
+
+.tips-section h3 {
+    color: hsl(var(--foreground));
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.section-description {
+    color: hsl(var(--muted-foreground));
+    font-size: 0.875rem;
+    margin-bottom: 16px;
+}
+
+.tip-item {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid hsl(var(--border) / 0.5);
+}
+
+.tip-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.tip-item h4 {
+    color: hsl(var(--foreground));
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.tip-item p {
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.tip-item ul {
+    margin: 12px 0;
+    padding-left: 20px;
+}
+
+.tip-item li {
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.tip-item strong {
+    color: hsl(var(--foreground));
+    font-weight: 600;
+}
+
 /* Settings Tab */
 .settings-header {
     background: hsl(var(--card));
@@ -798,12 +866,6 @@ body {
     font-size: 1.125rem;
     font-weight: 600;
     margin-bottom: 8px;
-}
-
-.section-description {
-    color: hsl(var(--muted-foreground));
-    font-size: 0.875rem;
-    margin-bottom: 16px;
 }
 
 .settings-form {
