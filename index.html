@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,8 +26,8 @@
             </div>
             <div class="header-right">
                 <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
-                    <span class="theme-icon sun-icon">☀️</span>
-                    <span class="theme-icon moon-icon">🌙</span>
+                    <span class="theme-icon sun-icon"><i class="fa-solid fa-sun"></i></span>
+                    <span class="theme-icon moon-icon"><i class="fa-solid fa-moon"></i></span>
                 </button>
             </div>
         </header>
@@ -37,7 +38,7 @@
                 <div class="nav-section">
                     <div class="nav-section-title">Dashboard</div>
                     <button class="tab-btn active" data-tab="overview">
-                        <span class="tab-icon">📊</span>
+                        <span class="tab-icon"><i class="fa-solid fa-chart-column"></i></span>
                         <span class="tab-text">Overview</span>
                     </button>
                 </div>
@@ -45,15 +46,15 @@
                 <div class="nav-section">
                     <div class="nav-section-title">Content</div>
                     <button class="tab-btn" data-tab="manage">
-                        <span class="tab-icon">📝</span>
+                        <span class="tab-icon"><i class="fa-solid fa-folder-open"></i></span>
                         <span class="tab-text">Manage Content</span>
                     </button>
                     <button class="tab-btn" data-tab="create">
-                        <span class="tab-icon">➕</span>
+                        <span class="tab-icon"><i class="fa-solid fa-plus"></i></span>
                         <span class="tab-text">Create Content</span>
                     </button>
                     <button class="tab-btn" data-tab="tips">
-                        <span class="tab-icon">💡</span>
+                        <span class="tab-icon"><i class="fa-solid fa-lightbulb"></i></span>
                         <span class="tab-text">Content Tips</span>
                     </button>
                 </div>
@@ -61,7 +62,7 @@
                 <div class="nav-section">
                     <div class="nav-section-title">System</div>
                     <button class="tab-btn" data-tab="settings">
-                        <span class="tab-icon">⚙️</span>
+                        <span class="tab-icon"><i class="fa-solid fa-gear"></i></span>
                         <span class="tab-text">Settings</span>
                     </button>
                 </div>
@@ -78,7 +79,7 @@
                     <div class="overview-cards">
                         <div class="stat-card">
                             <div class="stat-card-content">
-                                <div class="stat-icon">📄</div>
+                                <div class="stat-icon"><i class="fa-solid fa-file-lines"></i></div>
                                 <div class="stat-info">
                                     <h3 id="total-content">0</h3>
                                     <p>Total Content</p>
@@ -87,7 +88,7 @@
                         </div>
                         <div class="stat-card">
                             <div class="stat-card-content">
-                                <div class="stat-icon">✅</div>
+                                <div class="stat-icon"><i class="fa-solid fa-circle-check"></i></div>
                                 <div class="stat-info">
                                     <h3 id="published-content">0</h3>
                                     <p>Published</p>
@@ -96,7 +97,7 @@
                         </div>
                         <div class="stat-card">
                             <div class="stat-card-content">
-                                <div class="stat-icon">📝</div>
+                                <div class="stat-icon"><i class="fa-solid fa-file-pen"></i></div>
                                 <div class="stat-info">
                                     <h3 id="draft-content">0</h3>
                                     <p>Drafts</p>
@@ -105,7 +106,7 @@
                         </div>
                         <div class="stat-card">
                             <div class="stat-card-content">
-                                <div class="stat-icon">🏷️</div>
+                                <div class="stat-icon"><i class="fa-solid fa-tags"></i></div>
                                 <div class="stat-info">
                                     <h3 id="total-categories">0</h3>
                                     <p>Categories</p>
@@ -144,11 +145,11 @@
                                 <div class="action-group">
                                     <input type="file" id="import-file" accept=".json" style="display: none;">
                                     <button id="import-btn" class="btn btn-secondary">
-                                        <span class="btn-icon">📥</span>
+                                        <span class="btn-icon"><i class="fa-solid fa-download"></i></span>
                                         Import Content
                                     </button>
                                     <button id="export-btn" class="btn btn-primary">
-                                        <span class="btn-icon">📤</span>
+                                        <span class="btn-icon"><i class="fa-solid fa-upload"></i></span>
                                         Export Content
                                     </button>
                                 </div>
@@ -242,35 +243,42 @@
                                 <h3>Content (Markdown)</h3>
                                 <div class="markdown-toolbar">
                                     <button type="button" class="toolbar-btn" data-action="bold" title="Bold">
-                                        <strong>B</strong>
+                                        <i class="fa-solid fa-bold"></i>
                                     </button>
                                     <button type="button" class="toolbar-btn" data-action="italic" title="Italic">
-                                        <em>I</em>
+                                        <i class="fa-solid fa-italic"></i>
                                     </button>
                                     <button type="button" class="toolbar-btn" data-action="heading" title="Heading">
-                                        H1
+                                        <i class="fa-solid fa-heading"></i>
                                     </button>
                                     <button type="button" class="toolbar-btn" data-action="link" title="Link">
-                                        🔗
+                                        <i class="fa-solid fa-link"></i>
                                     </button>
                                     <button type="button" class="toolbar-btn" data-action="image" title="Image">
-                                        🖼️
+                                        <i class="fa-solid fa-image"></i>
                                     </button>
                                     <button type="button" class="toolbar-btn" data-action="code" title="Code">
-                                        💻
+                                        <i class="fa-solid fa-code"></i>
                                     </button>
                                     <button type="button" class="toolbar-btn" data-action="quote" title="Quote">
-                                        💬
+                                        <i class="fa-solid fa-quote-left"></i>
                                     </button>
                                     <button type="button" class="toolbar-btn" data-action="list" title="List">
-                                        📝
+                                        <i class="fa-solid fa-list"></i>
                                     </button>
                                 </div>
                             </div>
                             
                             <div class="editor-container">
-                                <div class="editor-pane">
+                                <div class="editor-pane editor-input">
+                                    <h4>Markdown Editor</h4>
                                     <textarea id="content" name="content" placeholder="Write your content in Markdown..."></textarea>
+                                </div>
+                                <div class="editor-pane editor-preview">
+                                    <h4>Live Preview</h4>
+                                    <div id="markdown-preview" class="preview-content">
+                                        <p class="preview-placeholder">Start typing to see your content preview...</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -293,11 +301,11 @@
 
                     <div class="tips-sections">
                         <div class="tips-section">
-                            <h3>📝 Essential Content Fields</h3>
+                            <h3><i class="fa-solid fa-pen-to-square"></i> Essential Content Fields</h3>
                             <p class="section-description">Understanding each field and how to use them effectively</p>
                             
                             <div class="tip-item">
-                                <h4>🎯 Title</h4>
+                                <h4><i class="fa-solid fa-bullseye"></i> Title</h4>
                                 <p><strong>Why it matters:</strong> Your title is the first thing readers see and is crucial for SEO. A compelling title can increase click-through rates by up to 500%.</p>
                                 <p><strong>Best practices:</strong></p>
                                 <ul>
@@ -310,7 +318,7 @@
                             </div>
 
                             <div class="tip-item">
-                                <h4>🔗 Slug</h4>
+                                <h4><i class="fa-solid fa-link"></i> Slug</h4>
                                 <p><strong>Why it matters:</strong> The slug is part of your URL and affects both SEO and user experience. It's automatically generated from your title but can be customized.</p>
                                 <p><strong>Best practices:</strong></p>
                                 <ul>
@@ -323,7 +331,7 @@
                             </div>
 
                             <div class="tip-item">
-                                <h4>📄 Content (Markdown)</h4>
+                                <h4><i class="fa-solid fa-file-lines"></i> Content (Markdown)</h4>
                                 <p><strong>Why it matters:</strong> This is your main content where you provide value to readers. Quality content keeps readers engaged and improves search rankings.</p>
                                 <p><strong>Best practices:</strong></p>
                                 <ul>
@@ -338,7 +346,7 @@
                             </div>
 
                             <div class="tip-item">
-                                <h4>🖼️ Featured Image URL</h4>
+                                <h4><i class="fa-solid fa-image"></i> Featured Image URL</h4>
                                 <p><strong>Why it matters:</strong> Visual content increases engagement by 94%. Your featured image appears in social shares and can significantly impact click-through rates.</p>
                                 <p><strong>Best practices:</strong></p>
                                 <ul>
@@ -351,11 +359,11 @@
                         </div>
 
                         <div class="tips-section">
-                            <h3>🔍 SEO Optimization</h3>
+                            <h3><i class="fa-solid fa-magnifying-glass"></i> SEO Optimization</h3>
                             <p class="section-description">Optimize your content for search engines and better discoverability</p>
                             
                             <div class="tip-item">
-                                <h4>📋 Meta Description</h4>
+                                <h4><i class="fa-solid fa-clipboard"></i> Meta Description</h4>
                                 <p><strong>Why it matters:</strong> This appears in search results below your title. A compelling meta description can improve your click-through rate from search results.</p>
                                 <p><strong>Best practices:</strong></p>
                                 <ul>
@@ -367,7 +375,7 @@
                             </div>
 
                             <div class="tip-item">
-                                <h4>🏷️ SEO Title</h4>
+                                <h4><i class="fa-solid fa-tag"></i> SEO Title</h4>
                                 <p><strong>Why it matters:</strong> This is the title that appears in search results and browser tabs. It can be different from your main title to optimize for search.</p>
                                 <p><strong>Best practices:</strong></p>
                                 <ul>
@@ -379,7 +387,7 @@
                             </div>
 
                             <div class="tip-item">
-                                <h4>🔑 Keywords</h4>
+                                <h4><i class="fa-solid fa-key"></i> Keywords</h4>
                                 <p><strong>Why it matters:</strong> Keywords help search engines understand your content topic and match it with user searches.</p>
                                 <p><strong>Best practices:</strong></p>
                                 <ul>
@@ -393,11 +401,11 @@
                         </div>
 
                         <div class="tips-section">
-                            <h3>🏷️ Organization & Metadata</h3>
+                            <h3><i class="fa-solid fa-tags"></i> Organization & Metadata</h3>
                             <p class="section-description">Properly categorize and tag your content for better organization</p>
                             
                             <div class="tip-item">
-                                <h4>📂 Categories</h4>
+                                <h4><i class="fa-solid fa-folder"></i> Categories</h4>
                                 <p><strong>Why it matters:</strong> Categories help organize your content into broad topics, making it easier for readers to find related content.</p>
                                 <p><strong>Best practices:</strong></p>
                                 <ul>
@@ -410,7 +418,7 @@
                             </div>
 
                             <div class="tip-item">
-                                <h4>🏷️ Tags</h4>
+                                <h4><i class="fa-solid fa-hashtag"></i> Tags</h4>
                                 <p><strong>Why it matters:</strong> Tags are more specific than categories and help readers discover related content on similar subtopics.</p>
                                 <p><strong>Best practices:</strong></p>
                                 <ul>
@@ -423,7 +431,7 @@
                             </div>
 
                             <div class="tip-item">
-                                <h4>✍️ Author</h4>
+                                <h4><i class="fa-solid fa-user-pen"></i> Author</h4>
                                 <p><strong>Why it matters:</strong> Author attribution builds trust and authority. It helps readers connect with the person behind the content.</p>
                                 <p><strong>Best practices:</strong></p>
                                 <ul>
@@ -434,7 +442,7 @@
                             </div>
 
                             <div class="tip-item">
-                                <h4>📊 Status</h4>
+                                <h4><i class="fa-solid fa-chart-line"></i> Status</h4>
                                 <p><strong>Why it matters:</strong> Content status helps you manage your publishing workflow and content lifecycle.</p>
                                 <p><strong>Options:</strong></p>
                                 <ul>
@@ -446,11 +454,11 @@
                         </div>
 
                         <div class="tips-section">
-                            <h3>🚀 Content Success Strategies</h3>
+                            <h3><i class="fa-solid fa-rocket"></i> Content Success Strategies</h3>
                             <p class="section-description">Advanced tips to make your content stand out and perform better</p>
                             
                             <div class="tip-item">
-                                <h4>📈 Engagement Optimization</h4>
+                                <h4><i class="fa-solid fa-chart-simple"></i> Engagement Optimization</h4>
                                 <ul>
                                     <li>Write compelling introductions that hook readers immediately</li>
                                     <li>Use storytelling techniques to make content more relatable</li>
@@ -461,7 +469,7 @@
                             </div>
 
                             <div class="tip-item">
-                                <h4>📱 Readability Best Practices</h4>
+                                <h4><i class="fa-solid fa-mobile-screen"></i> Readability Best Practices</h4>
                                 <ul>
                                     <li>Use short sentences and paragraphs</li>
                                     <li>Include plenty of white space</li>
@@ -472,7 +480,7 @@
                             </div>
 
                             <div class="tip-item">
-                                <h4>🎯 Content Planning</h4>
+                                <h4><i class="fa-solid fa-calendar-days"></i> Content Planning</h4>
                                 <ul>
                                     <li>Research your audience's pain points and interests</li>
                                     <li>Create content that solves specific problems</li>
@@ -494,7 +502,7 @@
 
                     <div class="settings-sections">
                         <div class="settings-section">
-                            <h3>JSON Data Preview</h3>
+                            <h3><i class="fa-solid fa-code"></i> JSON Data Preview</h3>
                             <p class="section-description">View your current content data in JSON format</p>
                             <div class="json-preview-area">
                                 <pre><code id="current-data-json">Loading...</code></pre>
@@ -502,22 +510,22 @@
                         </div>
 
                         <div class="settings-section">
-                            <h3>System Backup & Restore</h3>
+                            <h3><i class="fa-solid fa-database"></i> System Backup & Restore</h3>
                             <p class="section-description">Backup your entire CMS data (content + settings) or restore from a previous backup</p>
                             <div class="settings-form">
                                 <div class="form-group">
                                     <label>System Data Management</label>
                                     <div class="button-group">
                                         <button type="button" class="btn btn-secondary" id="backup-data">
-                                            <span class="btn-icon">💾</span>
+                                            <span class="btn-icon"><i class="fa-solid fa-download"></i></span>
                                             Create System Backup
                                         </button>
                                         <button type="button" class="btn btn-secondary" id="restore-data">
-                                            <span class="btn-icon">📥</span>
+                                            <span class="btn-icon"><i class="fa-solid fa-upload"></i></span>
                                             Restore from Backup
                                         </button>
                                         <button type="button" class="btn btn-danger" id="clear-data">
-                                            <span class="btn-icon">🗑️</span>
+                                            <span class="btn-icon"><i class="fa-solid fa-trash"></i></span>
                                             Clear All Data
                                         </button>
                                     </div>
@@ -530,6 +538,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

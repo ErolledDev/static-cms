@@ -27,6 +27,7 @@ const tabNavigation = document.getElementById('tab-navigation');
 const sidebarOverlay = document.getElementById('sidebar-overlay');
 const themeToggle = document.getElementById('theme-toggle');
 const currentDataJson = document.getElementById('current-data-json');
+const markdownPreview = document.getElementById('markdown-preview');
 
 // Initialize the dashboard
 document.addEventListener('DOMContentLoaded', function() {
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadContentData();
     loadSettings();
     initializeTheme();
+    setupMarkdownPreview();
 });
 
 // Initialize dashboard functionality
@@ -49,6 +51,36 @@ function initializeDashboard() {
             .trim();
         document.getElementById('slug').value = slug;
     });
+}
+
+// Setup markdown live preview
+function setupMarkdownPreview() {
+    if (contentTextarea && markdownPreview) {
+        contentTextarea.addEventListener('input', updateMarkdownPreview);
+        // Initial preview update
+        updateMarkdownPreview();
+    }
+}
+
+// Update markdown preview
+function updateMarkdownPreview() {
+    if (!markdownPreview || !contentTextarea) return;
+    
+    const markdownText = contentTextarea.value;
+    
+    if (!markdownText.trim()) {
+        markdownPreview.innerHTML = '<p class="preview-placeholder">Start typing to see your content preview...</p>';
+        return;
+    }
+    
+    try {
+        // Use marked.js to convert markdown to HTML
+        const html = marked.parse(markdownText);
+        markdownPreview.innerHTML = html;
+    } catch (error) {
+        console.error('Markdown parsing error:', error);
+        markdownPreview.innerHTML = '<p class="preview-placeholder">Error parsing markdown...</p>';
+    }
 }
 
 // Setup all event listeners
@@ -359,6 +391,11 @@ function handleFormSubmit(e) {
     updateFormTitle('Create New Content', 'Create Content');
     updateDashboard();
     
+    // Clear markdown preview
+    if (markdownPreview) {
+        markdownPreview.innerHTML = '<p class="preview-placeholder">Start typing to see your content preview...</p>';
+    }
+    
     // Switch to manage tab to see the result
     switchTab('manage');
     
@@ -389,6 +426,9 @@ function editContent(id) {
     // Update form title and button
     updateFormTitle('Edit Content', 'Update Content');
     
+    // Update markdown preview
+    updateMarkdownPreview();
+    
     // Switch to create tab
     switchTab('create');
 }
@@ -407,6 +447,11 @@ function cancelEditing() {
     editingId = null;
     contentForm.reset();
     updateFormTitle('Create New Content', 'Create Content');
+    
+    // Clear markdown preview
+    if (markdownPreview) {
+        markdownPreview.innerHTML = '<p class="preview-placeholder">Start typing to see your content preview...</p>';
+    }
 }
 
 // Export to JSON
@@ -569,9 +614,10 @@ function clearAllData() {
 
 // Handle markdown toolbar
 function handleMarkdownToolbar(e) {
-    if (!e.target.classList.contains('toolbar-btn')) return;
+    if (!e.target.closest('.toolbar-btn')) return;
     
-    const action = e.target.dataset.action;
+    const button = e.target.closest('.toolbar-btn');
+    const action = button.dataset.action;
     const textarea = contentTextarea;
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
@@ -627,6 +673,9 @@ function handleMarkdownToolbar(e) {
     const newCursorPos = start + replacement.length + cursorOffset;
     textarea.setSelectionRange(newCursorPos, newCursorPos);
     textarea.focus();
+    
+    // Update preview
+    updateMarkdownPreview();
 }
 
 // Utility functions
