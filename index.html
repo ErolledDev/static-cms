@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Management Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>Content Management System</h1>
+            <p>Manage your content with ease</p>
+        </header>
+
+        <div class="main-layout">
+            <nav class="tab-navigation">
+                <button class="tab-btn active" data-tab="overview">
+                    <span class="tab-icon">📊</span>
+                    <span class="tab-text">Overview</span>
+                </button>
+                <button class="tab-btn" data-tab="manage">
+                    <span class="tab-icon">📝</span>
+                    <span class="tab-text">Manage Content</span>
+                </button>
+                <button class="tab-btn" data-tab="create">
+                    <span class="tab-icon">➕</span>
+                    <span class="tab-text">Create Content</span>
+                </button>
+                <button class="tab-btn" data-tab="settings">
+                    <span class="tab-icon">⚙️</span>
+                    <span class="tab-text">Settings</span>
+                </button>
+            </nav>
+
+            <main class="dashboard-content">
+                <!-- Overview Tab -->
+                <div id="overview-tab" class="tab-content active">
+                    <div class="overview-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon">📄</div>
+                            <div class="stat-info">
+                                <h3 id="total-content">0</h3>
+                                <p>Total Content</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">✅</div>
+                            <div class="stat-info">
+                                <h3 id="published-content">0</h3>
+                                <p>Published</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📝</div>
+                            <div class="stat-info">
+                                <h3 id="draft-content">0</h3>
+                                <p>Drafts</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🏷️</div>
+                            <div class="stat-info">
+                                <h3 id="total-categories">0</h3>
+                                <p>Categories</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recent-content">
+                        <h2>Recent Content</h2>
+                        <div id="recent-content-list" class="content-list">
+                            <!-- Recent content will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manage Content Tab -->
+                <div id="manage-tab" class="tab-content">
+                    <div class="manage-header">
+                        <h2>Manage Content</h2>
+                        <div class="manage-actions">
+                            <div class="filter-group">
+                                <select id="status-filter" class="filter-select">
+                                    <option value="all">All Status</option>
+                                    <option value="published">Published</option>
+                                    <option value="draft">Draft</option>
+                                </select>
+                                <input type="text" id="search-filter" class="filter-input" placeholder="Search content...">
+                            </div>
+                            <div class="action-group">
+                                <input type="file" id="import-file" accept=".json" style="display: none;">
+                                <button id="import-btn" class="btn btn-secondary">
+                                    <span class="btn-icon">📥</span>
+                                    Import JSON
+                                </button>
+                                <button id="export-btn" class="btn btn-primary">
+                                    <span class="btn-icon">📤</span>
+                                    Export JSON
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table id="content-table" class="content-table">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Author</th>
+                                    <th>Categories</th>
+                                    <th>Publish Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="content-table-body">
+                                <!-- Content rows will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Create Content Tab -->
+                <div id="create-tab" class="tab-content">
+                    <div class="create-header">
+                        <h2 id="form-title">Create New Content</h2>
+                    </div>
+
+                    <form id="content-form" class="content-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="title">Title *</label>
+                                <input type="text" id="title" name="title" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="slug">Slug *</label>
+                                <input type="text" id="slug" name="slug" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="author">Author</label>
+                                <input type="text" id="author" name="author">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select id="status" name="status">
+                                    <option value="draft">Draft</option>
+                                    <option value="published">Published</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="featuredImageUrl">Featured Image URL</label>
+                                <input type="url" id="featuredImageUrl" name="featuredImageUrl">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="publishDate">Publish Date</label>
+                                <input type="datetime-local" id="publishDate" name="publishDate">
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="metaDescription">Meta Description</label>
+                                <textarea id="metaDescription" name="metaDescription" rows="3"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="seoTitle">SEO Title</label>
+                                <input type="text" id="seoTitle" name="seoTitle">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="keywords">Keywords (comma-separated)</label>
+                                <input type="text" id="keywords" name="keywords" placeholder="nextjs, firebase, blog">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="categories">Categories (comma-separated)</label>
+                                <input type="text" id="categories" name="categories" placeholder="Web Development, Cloud">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tags">Tags (comma-separated)</label>
+                                <input type="text" id="tags" name="tags" placeholder="nextjs, firebase, cloudflare">
+                            </div>
+                        </div>
+
+                        <div class="content-editor">
+                            <div class="editor-header">
+                                <h3>Content (Markdown)</h3>
+                                <div class="markdown-toolbar">
+                                    <button type="button" class="toolbar-btn" data-action="bold" title="Bold">
+                                        <strong>B</strong>
+                                    </button>
+                                    <button type="button" class="toolbar-btn" data-action="italic" title="Italic">
+                                        <em>I</em>
+                                    </button>
+                                    <button type="button" class="toolbar-btn" data-action="heading" title="Heading">
+                                        H1
+                                    </button>
+                                    <button type="button" class="toolbar-btn" data-action="link" title="Link">
+                                        🔗
+                                    </button>
+                                    <button type="button" class="toolbar-btn" data-action="image" title="Image">
+                                        🖼️
+                                    </button>
+                                    <button type="button" class="toolbar-btn" data-action="code" title="Code">
+                                        💻
+                                    </button>
+                                    <button type="button" class="toolbar-btn" data-action="quote" title="Quote">
+                                        💬
+                                    </button>
+                                    <button type="button" class="toolbar-btn" data-action="list" title="List">
+                                        📝
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="editor-container">
+                                <div class="editor-pane">
+                                    <textarea id="content" name="content" placeholder="Write your content in Markdown..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" id="cancel-btn" class="btn btn-secondary">Cancel</button>
+                            <button type="submit" class="btn btn-primary">
+                                <span id="submit-text">Create Content</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Settings Tab -->
+                <div id="settings-tab" class="tab-content">
+                    <div class="settings-header">
+                        <h2>Settings</h2>
+                        <p>Configure your content management system</p>
+                    </div>
+
+                    <div class="settings-sections">
+                        <div class="settings-section">
+                            <h3>General Settings</h3>
+                            <div class="settings-form">
+                                <div class="form-group">
+                                    <label for="site-title">Site Title</label>
+                                    <input type="text" id="site-title" value="Content Management System">
+                                </div>
+                                <div class="form-group">
+                                    <label for="site-description">Site Description</label>
+                                    <textarea id="site-description" rows="3">Manage your content with ease</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="default-author">Default Author</label>
+                                    <input type="text" id="default-author" placeholder="Enter default author name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="default-status">Default Content Status</label>
+                                    <select id="default-status">
+                                        <option value="draft">Draft</option>
+                                        <option value="published">Published</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3>Data Management</h3>
+                            <div class="settings-form">
+                                <div class="form-group">
+                                    <label>Backup & Restore</label>
+                                    <div class="button-group">
+                                        <button type="button" class="btn btn-secondary" id="backup-data">
+                                            <span class="btn-icon">💾</span>
+                                            Backup Data
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" id="restore-data">
+                                            <span class="btn-icon">📥</span>
+                                            Restore Data
+                                        </button>
+                                        <button type="button" class="btn btn-danger" id="clear-data">
+                                            <span class="btn-icon">🗑️</span>
+                                            Clear All Data
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-actions">
+                            <button type="button" class="btn btn-primary" id="save-settings">
+                                <span class="btn-icon">💾</span>
+                                Save Settings
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
