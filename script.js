@@ -3,8 +3,8 @@ let contentData = [];
 let filteredData = [];
 let editingId = null;
 let settings = {
-    siteTitle: 'Content Management System',
-    siteDescription: 'Manage your content with ease',
+    siteTitle: 'Admin CMS',
+    siteDescription: 'Manage content',
     defaultAuthor: '',
     defaultStatus: 'draft'
 };
@@ -22,6 +22,10 @@ const cancelBtn = document.getElementById('cancel-btn');
 const markdownToolbar = document.querySelector('.markdown-toolbar');
 const statusFilter = document.getElementById('status-filter');
 const searchFilter = document.getElementById('search-filter');
+const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+const tabNavigation = document.getElementById('tab-navigation');
+const sidebarOverlay = document.getElementById('sidebar-overlay');
+const themeToggle = document.getElementById('theme-toggle');
 
 // Initialize the dashboard
 document.addEventListener('DOMContentLoaded', function() {
@@ -29,15 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
     setupEventListeners();
     loadContentData();
     loadSettings();
+    initializeTheme();
 });
 
 // Initialize dashboard functionality
 function initializeDashboard() {
-    // Set default publish date to current date
-    const now = new Date();
-    const localDateTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
-    document.getElementById('publishDate').value = localDateTime;
-    
     // Auto-generate slug from title
     document.getElementById('title').addEventListener('input', function() {
         const slug = this.value
@@ -54,7 +54,10 @@ function initializeDashboard() {
 function setupEventListeners() {
     // Tab switching
     tabButtons.forEach(button => {
-        button.addEventListener('click', () => switchTab(button.dataset.tab));
+        button.addEventListener('click', () => {
+            switchTab(button.dataset.tab);
+            closeMobileMenu();
+        });
     });
 
     // Form submission
@@ -75,8 +78,50 @@ function setupEventListeners() {
     statusFilter.addEventListener('change', applyFilters);
     searchFilter.addEventListener('input', applyFilters);
 
+    // Mobile menu
+    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+    sidebarOverlay.addEventListener('click', closeMobileMenu);
+
+    // Theme toggle
+    themeToggle.addEventListener('click', toggleTheme);
+
     // Settings functionality
     setupSettingsListeners();
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!tabNavigation.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            closeMobileMenu();
+        }
+    });
+}
+
+// Mobile menu functions
+function toggleMobileMenu() {
+    mobileMenuToggle.classList.toggle('active');
+    tabNavigation.classList.toggle('active');
+    sidebarOverlay.classList.toggle('active');
+    document.body.style.overflow = tabNavigation.classList.contains('active') ? 'hidden' : '';
+}
+
+function closeMobileMenu() {
+    mobileMenuToggle.classList.remove('active');
+    tabNavigation.classList.remove('active');
+    sidebarOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Theme functions
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('cms-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+}
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('cms-theme', newTheme);
 }
 
 // Setup settings event listeners
@@ -139,30 +184,36 @@ function loadSettings() {
     }
     
     // Apply settings to UI
-    document.getElementById('site-title').value = settings.siteTitle;
-    document.getElementById('site-description').value = settings.siteDescription;
-    document.getElementById('default-author').value = settings.defaultAuthor;
-    document.getElementById('default-status').value = settings.defaultStatus;
+    const defaultAuthorInput = document.getElementById('default-author');
+    const defaultStatusSelect = document.getElementById('default-status');
+    
+    if (defaultAuthorInput) {
+        defaultAuthorInput.value = settings.defaultAuthor;
+    }
+    if (defaultStatusSelect) {
+        defaultStatusSelect.value = settings.defaultStatus;
+    }
     
     // Update header
     document.querySelector('.dashboard-header h1').textContent = settings.siteTitle;
-    document.querySelector('.dashboard-header p').textContent = settings.siteDescription;
+    const headerDesc = document.querySelector('.dashboard-header p');
+    if (headerDesc) {
+        headerDesc.textContent = settings.siteDescription;
+    }
 }
 
 // Save settings to localStorage
 function saveSettings() {
+    const defaultAuthorInput = document.getElementById('default-author');
+    const defaultStatusSelect = document.getElementById('default-status');
+    
     settings = {
-        siteTitle: document.getElementById('site-title').value,
-        siteDescription: document.getElementById('site-description').value,
-        defaultAuthor: document.getElementById('default-author').value,
-        defaultStatus: document.getElementById('default-status').value
+        ...settings,
+        defaultAuthor: defaultAuthorInput ? defaultAuthorInput.value : settings.defaultAuthor,
+        defaultStatus: defaultStatusSelect ? defaultStatusSelect.value : settings.defaultStatus
     };
     
     localStorage.setItem('cms-settings', JSON.stringify(settings));
-    
-    // Update header
-    document.querySelector('.dashboard-header h1').textContent = settings.siteTitle;
-    document.querySelector('.dashboard-header p').textContent = settings.siteDescription;
     
     showNotification('Settings saved successfully!', 'success');
 }
@@ -287,6 +338,8 @@ function handleFormSubmit(e) {
     e.preventDefault();
     
     const formData = new FormData(contentForm);
+    const now = new Date().toISOString();
+    
     const contentItem = {
         id: editingId || generateId(),
         title: formData.get('title'),
@@ -300,9 +353,9 @@ function handleFormSubmit(e) {
         categories: parseCommaSeparated(formData.get('categories')),
         tags: parseCommaSeparated(formData.get('tags')),
         status: formData.get('status'),
-        publishDate: formData.get('publishDate') ? new Date(formData.get('publishDate')).toISOString() : new Date().toISOString(),
-        createdAt: editingId ? getExistingItem(editingId).createdAt : new Date().toISOString(),
-        updatedAt: new Date().toISOString()
+        publishDate: now, // Automatically set to current date/time
+        createdAt: editingId ? getExistingItem(editingId).createdAt : now,
+        updatedAt: now
     };
 
     if (editingId) {
@@ -348,12 +401,6 @@ function editContent(id) {
     document.getElementById('categories').value = Array.isArray(item.categories) ? item.categories.join(', ') : '';
     document.getElementById('tags').value = Array.isArray(item.tags) ? item.tags.join(', ') : '';
     document.getElementById('status').value = item.status;
-    
-    if (item.publishDate) {
-        const date = new Date(item.publishDate);
-        const localDateTime = new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
-        document.getElementById('publishDate').value = localDateTime;
-    }
 
     // Update form title and button
     updateFormTitle('Edit Content', 'Update Content');
@@ -523,8 +570,8 @@ function clearAllData() {
     contentData = [];
     filteredData = [];
     settings = {
-        siteTitle: 'Content Management System',
-        siteDescription: 'Manage your content with ease',
+        siteTitle: 'Admin CMS',
+        siteDescription: 'Manage Content',
         defaultAuthor: '',
         defaultStatus: 'draft'
     };
@@ -648,7 +695,6 @@ function showNotification(message, type = 'info') {
         font-weight: 600;
         z-index: 1000;
         transform: translateX(100%);
-        transition: transform 0.3s ease;
         max-width: 400px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     `;
