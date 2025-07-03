@@ -26,6 +26,7 @@ const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
 const tabNavigation = document.getElementById('tab-navigation');
 const sidebarOverlay = document.getElementById('sidebar-overlay');
 const themeToggle = document.getElementById('theme-toggle');
+const currentDataJson = document.getElementById('current-data-json');
 
 // Initialize the dashboard
 document.addEventListener('DOMContentLoaded', function() {
@@ -126,14 +127,9 @@ function toggleTheme() {
 
 // Setup settings event listeners
 function setupSettingsListeners() {
-    const saveSettingsBtn = document.getElementById('save-settings');
     const backupDataBtn = document.getElementById('backup-data');
     const restoreDataBtn = document.getElementById('restore-data');
     const clearDataBtn = document.getElementById('clear-data');
-
-    if (saveSettingsBtn) {
-        saveSettingsBtn.addEventListener('click', saveSettings);
-    }
 
     if (backupDataBtn) {
         backupDataBtn.addEventListener('click', backupData);
@@ -183,17 +179,6 @@ function loadSettings() {
         settings = { ...settings, ...JSON.parse(savedSettings) };
     }
     
-    // Apply settings to UI
-    const defaultAuthorInput = document.getElementById('default-author');
-    const defaultStatusSelect = document.getElementById('default-status');
-    
-    if (defaultAuthorInput) {
-        defaultAuthorInput.value = settings.defaultAuthor;
-    }
-    if (defaultStatusSelect) {
-        defaultStatusSelect.value = settings.defaultStatus;
-    }
-    
     // Update header
     document.querySelector('.dashboard-header h1').textContent = settings.siteTitle;
     const headerDesc = document.querySelector('.dashboard-header p');
@@ -202,20 +187,15 @@ function loadSettings() {
     }
 }
 
-// Save settings to localStorage
-function saveSettings() {
-    const defaultAuthorInput = document.getElementById('default-author');
-    const defaultStatusSelect = document.getElementById('default-status');
-    
-    settings = {
-        ...settings,
-        defaultAuthor: defaultAuthorInput ? defaultAuthorInput.value : settings.defaultAuthor,
-        defaultStatus: defaultStatusSelect ? defaultStatusSelect.value : settings.defaultStatus
-    };
-    
-    localStorage.setItem('cms-settings', JSON.stringify(settings));
-    
-    showNotification('Settings saved successfully!', 'success');
+// Update JSON preview
+function updateJsonPreview() {
+    if (currentDataJson) {
+        if (contentData.length === 0) {
+            currentDataJson.textContent = '[]';
+        } else {
+            currentDataJson.textContent = JSON.stringify(contentData, null, 2);
+        }
+    }
 }
 
 // Apply filters to content
@@ -250,6 +230,11 @@ function switchTab(tabName) {
     if (tabName === 'manage') {
         applyFilters();
     }
+    
+    // Update JSON preview when switching to settings tab
+    if (tabName === 'settings') {
+        updateJsonPreview();
+    }
 }
 
 // Update all dashboard components
@@ -257,6 +242,7 @@ function updateDashboard() {
     updateOverviewStats();
     updateRecentContent();
     applyFilters();
+    updateJsonPreview();
 }
 
 // Update overview statistics
@@ -520,7 +506,7 @@ function backupData() {
     link.click();
     document.body.removeChild(link);
     
-    showNotification('Backup created successfully!', 'success');
+    showNotification('System backup created successfully!', 'success');
 }
 
 // Handle restore
@@ -544,7 +530,7 @@ function handleRestore(e) {
                         loadSettings();
                     }
                     updateDashboard();
-                    showNotification('Data restored successfully!', 'success');
+                    showNotification('System data restored successfully!', 'success');
                 }
             } else {
                 showNotification('Invalid backup file format!', 'error');

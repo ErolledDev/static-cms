@@ -141,11 +141,11 @@
                                     <input type="file" id="import-file" accept=".json" style="display: none;">
                                     <button id="import-btn" class="btn btn-secondary">
                                         <span class="btn-icon">📥</span>
-                                        Import JSON
+                                        Import Content
                                     </button>
                                     <button id="export-btn" class="btn btn-primary">
                                         <span class="btn-icon">📤</span>
-                                        Export JSON
+                                        Export Content
                                     </button>
                                 </div>
                             </div>
@@ -286,40 +286,32 @@
                 <div id="settings-tab" class="tab-content">
                     <div class="page-header">
                         <h1 class="page-title">Settings</h1>
-                        <p class="page-description">Configure your content management system preferences</p>
+                        <p class="page-description">Configure your content management system preferences and view data</p>
                     </div>
 
                     <div class="settings-sections">
                         <div class="settings-section">
-                            <h3>Content Settings</h3>
-                            <div class="settings-form">
-                                <div class="form-group">
-                                    <label for="default-author">Default Author</label>
-                                    <input type="text" id="default-author">
-                                </div>
-                                <div class="form-group">
-                                    <label for="default-status">Default Content Status</label>
-                                    <select id="default-status">
-                                        <option value="draft">Draft</option>
-                                        <option value="published">Published</option>
-                                    </select>
-                                </div>
+                            <h3>JSON Data Preview</h3>
+                            <p class="section-description">View your current content data in JSON format</p>
+                            <div class="json-preview-area">
+                                <pre><code id="current-data-json">Loading...</code></pre>
                             </div>
                         </div>
 
                         <div class="settings-section">
-                            <h3>Data Management</h3>
+                            <h3>System Backup & Restore</h3>
+                            <p class="section-description">Backup your entire CMS data (content + settings) or restore from a previous backup</p>
                             <div class="settings-form">
                                 <div class="form-group">
-                                    <label>Backup & Restore</label>
+                                    <label>System Data Management</label>
                                     <div class="button-group">
                                         <button type="button" class="btn btn-secondary" id="backup-data">
                                             <span class="btn-icon">💾</span>
-                                            Backup Data
+                                            Create System Backup
                                         </button>
                                         <button type="button" class="btn btn-secondary" id="restore-data">
                                             <span class="btn-icon">📥</span>
-                                            Restore Data
+                                            Restore from Backup
                                         </button>
                                         <button type="button" class="btn btn-danger" id="clear-data">
                                             <span class="btn-icon">🗑️</span>
@@ -328,13 +320,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="settings-actions">
-                            <button type="button" class="btn btn-primary" id="save-settings">
-                                <span class="btn-icon">💾</span>
-                                Save Settings
-                            </button>
                         </div>
                     </div>
                 </div>
