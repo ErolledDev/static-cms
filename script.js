@@ -28,6 +28,7 @@ const sidebarOverlay = document.getElementById('sidebar-overlay');
 const themeToggle = document.getElementById('theme-toggle');
 const currentDataJson = document.getElementById('current-data-json');
 const markdownPreview = document.getElementById('markdown-preview');
+const copyJsonBtn = document.getElementById('copy-json-btn');
 
 // Initialize the dashboard
 document.addEventListener('DOMContentLoaded', function() {
@@ -118,6 +119,11 @@ function setupEventListeners() {
     // Theme toggle
     themeToggle.addEventListener('click', toggleTheme);
 
+    // Copy JSON functionality
+    if (copyJsonBtn) {
+        copyJsonBtn.addEventListener('click', copyJsonData);
+    }
+
     // Settings functionality
     setupSettingsListeners();
 
@@ -127,6 +133,47 @@ function setupEventListeners() {
             closeMobileMenu();
         }
     });
+}
+
+// Copy JSON data to clipboard
+async function copyJsonData() {
+    try {
+        const jsonText = currentDataJson.textContent;
+        
+        if (!jsonText || jsonText === 'Loading...') {
+            showNotification('No data to copy!', 'warning');
+            return;
+        }
+
+        // Use the modern clipboard API
+        if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(jsonText);
+            showNotification('JSON data copied to clipboard!', 'success');
+        } else {
+            // Fallback for older browsers or non-secure contexts
+            const textArea = document.createElement('textarea');
+            textArea.value = jsonText;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showNotification('JSON data copied to clipboard!', 'success');
+            } catch (err) {
+                console.error('Fallback copy failed:', err);
+                showNotification('Failed to copy data. Please select and copy manually.', 'error');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+    } catch (error) {
+        console.error('Copy failed:', error);
+        showNotification('Failed to copy data to clipboard!', 'error');
+    }
 }
 
 // Mobile menu functions
