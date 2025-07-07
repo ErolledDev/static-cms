@@ -241,44 +241,41 @@
                         <div class="content-editor">
                             <div class="editor-header">
                                 <h3>Content (Markdown)</h3>
-                                <div class="markdown-toolbar">
-                                    <button type="button" class="toolbar-btn" data-action="bold" title="Bold">
-                                        <i class="fa-solid fa-bold"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" data-action="italic" title="Italic">
-                                        <i class="fa-solid fa-italic"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" data-action="heading" title="Heading">
-                                        <i class="fa-solid fa-heading"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" data-action="link" title="Link">
-                                        <i class="fa-solid fa-link"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" data-action="image" title="Image">
-                                        <i class="fa-solid fa-image"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" data-action="code" title="Code">
-                                        <i class="fa-solid fa-code"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" data-action="quote" title="Quote">
-                                        <i class="fa-solid fa-quote-left"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" data-action="list" title="List">
-                                        <i class="fa-solid fa-list"></i>
-                                    </button>
-                                </div>
+                                <button type="button" id="preview-btn" class="btn btn-secondary">
+                                    <span class="btn-icon"><i class="fa-solid fa-eye"></i></span>
+                                    Preview Markdown
+                                </button>
                             </div>
                             
                             <div class="editor-container">
-                                <div class="editor-pane editor-input">
-                                    <h4>Markdown Editor</h4>
-                                    <textarea id="content" name="content" placeholder="Write your content in Markdown..."></textarea>
-                                </div>
-                                <div class="editor-pane editor-preview">
-                                    <h4>Live Preview</h4>
-                                    <div id="markdown-preview" class="preview-content">
-                                        <p class="preview-placeholder">Start typing to see your content preview...</p>
+                                <div class="editor-input-wrapper">
+                                    <div class="markdown-toolbar">
+                                        <button type="button" class="toolbar-btn" data-action="bold" title="Bold">
+                                            <i class="fa-solid fa-bold"></i>
+                                        </button>
+                                        <button type="button" class="toolbar-btn" data-action="italic" title="Italic">
+                                            <i class="fa-solid fa-italic"></i>
+                                        </button>
+                                        <button type="button" class="toolbar-btn" data-action="heading" title="Heading">
+                                            <i class="fa-solid fa-heading"></i>
+                                        </button>
+                                        <button type="button" class="toolbar-btn" data-action="link" title="Link">
+                                            <i class="fa-solid fa-link"></i>
+                                        </button>
+                                        <button type="button" class="toolbar-btn" data-action="image" title="Image">
+                                            <i class="fa-solid fa-image"></i>
+                                        </button>
+                                        <button type="button" class="toolbar-btn" data-action="code" title="Code">
+                                            <i class="fa-solid fa-code"></i>
+                                        </button>
+                                        <button type="button" class="toolbar-btn" data-action="quote" title="Quote">
+                                            <i class="fa-solid fa-quote-left"></i>
+                                        </button>
+                                        <button type="button" class="toolbar-btn" data-action="list" title="List">
+                                            <i class="fa-solid fa-list"></i>
+                                        </button>
                                     </div>
+                                    <textarea id="content" name="content" placeholder="Write your content in Markdown..."></textarea>
                                 </div>
                             </div>
                         </div>
@@ -541,6 +538,23 @@
                     </div>
                 </div>
             </main>
+        </div>
+    </div>
+
+    <!-- Markdown Preview Modal -->
+    <div id="preview-modal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Markdown Preview</h3>
+                <button type="button" id="close-modal" class="modal-close">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-content">
+                <div id="markdown-preview" class="preview-content">
+                    <p class="preview-placeholder">Start typing to see your content preview...</p>
+                </div>
+            </div>
         </div>
     </div>
 
