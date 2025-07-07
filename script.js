@@ -32,6 +32,10 @@ const copyJsonBtn = document.getElementById('copy-json-btn');
 const previewBtn = document.getElementById('preview-btn');
 const previewModal = document.getElementById('preview-modal');
 const closeModalBtn = document.getElementById('close-modal');
+const contentPreviewModal = document.getElementById('content-preview-modal');
+const closeContentPreviewBtn = document.getElementById('close-content-preview');
+const contentPreviewTitle = document.getElementById('content-preview-title');
+const contentPreviewContent = document.getElementById('content-preview-content');
 
 // Initialize the dashboard
 document.addEventListener('DOMContentLoaded', function() {
@@ -113,6 +117,19 @@ function setupEventListeners() {
         });
     }
 
+    // Content preview modal functionality
+    if (closeContentPreviewBtn) {
+        closeContentPreviewBtn.addEventListener('click', closeContentPreviewModal);
+    }
+    
+    if (contentPreviewModal) {
+        contentPreviewModal.addEventListener('click', (e) => {
+            if (e.target === contentPreviewModal) {
+                closeContentPreviewModal();
+            }
+        });
+    }
+
     // Settings functionality
     setupSettingsListeners();
 
@@ -125,8 +142,13 @@ function setupEventListeners() {
 
     // Close modal on Escape key
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && previewModal.classList.contains('active')) {
-            closePreviewModal();
+        if (e.key === 'Escape') {
+            if (previewModal.classList.contains('active')) {
+                closePreviewModal();
+            }
+            if (contentPreviewModal.classList.contains('active')) {
+                closeContentPreviewModal();
+            }
         }
     });
 }
@@ -140,6 +162,30 @@ function openPreviewModal() {
 
 function closePreviewModal() {
     previewModal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Content preview modal functions
+function openContentPreviewModal(id) {
+    const item = contentData.find(content => content.id === id);
+    if (!item) return;
+
+    contentPreviewTitle.textContent = item.title;
+    
+    try {
+        const html = marked.parse(item.content || '');
+        contentPreviewContent.innerHTML = html;
+    } catch (error) {
+        console.error('Markdown parsing error:', error);
+        contentPreviewContent.innerHTML = '<p class="preview-placeholder">Error parsing markdown content...</p>';
+    }
+    
+    contentPreviewModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeContentPreviewModal() {
+    contentPreviewModal.classList.remove('active');
     document.body.style.overflow = '';
 }
 
@@ -417,12 +463,27 @@ function renderContentTable() {
             <td>${formatDate(item.publishDate)}</td>
             <td>
                 <div class="action-buttons">
-                    <button class="btn btn-secondary btn-small" onclick="editContent('${item.id}')">Edit</button>
-                    <button class="btn btn-danger btn-small" onclick="deleteContent('${item.id}')">Delete</button>
+                    <button class="btn btn-secondary btn-small" onclick="previewContent('${item.id}')" title="Preview Content">
+                        <span class="btn-icon"><i class="fa-solid fa-eye"></i></span>
+                        Preview
+                    </button>
+                    <button class="btn btn-secondary btn-small" onclick="editContent('${item.id}')" title="Edit Content">
+                        <span class="btn-icon"><i class="fa-solid fa-edit"></i></span>
+                        Edit
+                    </button>
+                    <button class="btn btn-danger btn-small" onclick="deleteContent('${item.id}')" title="Delete Content">
+                        <span class="btn-icon"><i class="fa-solid fa-trash"></i></span>
+                        Delete
+                    </button>
                 </div>
             </td>
         </tr>
     `).join('');
+}
+
+// Preview content
+function previewContent(id) {
+    openContentPreviewModal(id);
 }
 
 // Handle form submission

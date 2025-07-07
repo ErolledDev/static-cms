@@ -593,7 +593,7 @@ body {
 .content-table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 600px;
+    min-width: 700px;
 }
 
 .content-table th {
@@ -1561,7 +1561,7 @@ body {
     
     .content-table {
         font-size: 0.8rem;
-        min-width: 500px;
+        min-width: 600px;
     }
     
     .content-table th,
@@ -1602,8 +1602,8 @@ body {
     }
     
     .markdown-toolbar {
+        padding: 4px;
         gap: 2px;
-        padding: 6px;
     }
     
     .toolbar-btn {
@@ -1734,7 +1734,7 @@ body {
     
     .content-table {
         font-size: 0.75rem;
-        min-width: 450px;
+        min-width: 550px;
     }
     
     .content-table th,
@@ -1894,7 +1894,7 @@ body {
     }
     
     .content-table {
-        min-width: 400px;
+        min-width: 500px;
     }
     
     .btn {
